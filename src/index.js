@@ -2,8 +2,8 @@ import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
 import axios from 'axios';
 import Notiflix from 'notiflix';
 
-
-axios.defaults.headers.common['x-api-key'] = 'live_FGH9lasd0oul4RhK4aaXXVevkdqzPmluPpIdqRAPTVq9GAtoohZ7VPmrFhJI1oqr';
+axios.defaults.headers.common['x-api-key'] =
+  'live_FGH9lasd0oul4RhK4aaXXVevkdqzPmluPpIdqRAPTVq9GAtoohZ7VPmrFhJI1oqr';
 
 const breedSelect = document.querySelector('.breed-select');
 const loader = document.querySelector('.loader');
@@ -34,7 +34,7 @@ breedSelect.addEventListener('change', event => {
   const breed = event.target.value;
 
   fetchCatByBreed(breed)
-    .then((data) => {
+    .then(data => {
       const catData = data.data[0].breeds[0];
 
       if (catData) {
@@ -44,7 +44,9 @@ breedSelect.addEventListener('change', event => {
           <p>${catData.temperament}</p>
           <img src='${data.data[0].url}' >`;
       } else {
-        catInfo.innerHTML = Notiflix.Notify.failure('No information available for this breed');
+        catInfo.innerHTML = Notiflix.Notify.failure(
+          'No information available for this breed'
+        );
       }
 
       loader.style.display = 'none';
