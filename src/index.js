@@ -10,24 +10,27 @@ const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 const catInfo = document.querySelector('.cat-info');
 
+breedSelect.style.display = 'none';
+
 fetchBreeds()
   .then(data => {
     const options = data.data;
 
     loader.style.display = 'block';
     error.style.display = 'none';
-    breedSelect.style.display = 'none';
 
     breedSelect.innerHTML = options
       .map(breed => `<option value="${breed.id}">${breed.name}</option>`)
       .join('');
 
     loader.style.display = 'none';
-    breedSelect.style.display = 'block';
   })
   .catch(() => {
     loader.style.display = 'none';
     error.style.display = 'block';
+  })
+  .finally(() => {
+    breedSelect.style.display = 'block';
   });
 
 breedSelect.addEventListener('change', event => {
